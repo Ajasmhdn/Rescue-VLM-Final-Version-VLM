@@ -1,37 +1,3 @@
-# ==========================================================
-# TRAIN VLM V3 — DGX SPARK GB10  ·  ZERO-HANG + SAFE RESUME
-#                                 ·  SAR CROSS-SENSOR FIX
-#
-# ALIGNMENT: Every component matches test_pipeline_v4.py exactly.
-#   - SAR pipeline  : V4 3-stage (MedianFilter → log1p → percentile)
-#   - Sensor tag    : sensor_tag(is_sar) — first token of every prompt
-#   - Prompt order  : sensor_tag + map_task + INSTRUCTION + label
-#   - Fusion        : cat([pre, post, post-pre]) = (B, 1536)
-#   - CLIP          : float32, blocks 8-11 + ln_post fine-tuned
-#   - Projector     : MultimodalProjectorV3, bfloat16
-#   - LLM           : Qwen2-1.5B-Instruct + LoRA r=64, bfloat16
-#
-# RESUME BEHAVIOUR:
-#   - Detects latest complete checkpoint in checkpoints/epoch_N/
-#   - Complete = lora/ + projector_v3.pt + optimizer.pt + scheduler.pt
-#   - Loads LoRA via PeftModel.from_pretrained (no double-adapter)
-#   - Restores best_val_loss + patience from train_log.json
-#   - Appends new epoch entries — no log gaps, no overwrites
-#   - Stop at epoch 5 → re-run → picks up at epoch 6 automatically
-#
-# HANG CATEGORIES ADDRESSED:
-#   A. DataLoader / multiprocessing deadlocks  (GB10 unified mem)
-#   B. CUDA unified-memory pressure & fragmentation
-#   C. Silent NaN/Inf that freeze backward() indefinitely
-#   D. Tokenizer blocking the main thread
-#   E. Checkpoint I/O corruption on crash-resume (atomic save)
-#   F. Watchdog: per-batch timeout kills truly stuck steps
-#   G. CUDA kernel launch failures (device assert)
-#   H. Corrupted dataset samples that stall collation
-#   I. Scheduler / optimizer state mismatch on resume
-#   J. open_clip encode_image dtype mismatch stall
-# ==========================================================
-
 import sys, os, json, math, time, signal, traceback, threading
 import torch
 from torch.utils.data import DataLoader
