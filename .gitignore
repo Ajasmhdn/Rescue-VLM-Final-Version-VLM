@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.cache/
+.env
+.env.*
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.bin
+baseline_qwen25vl/models/

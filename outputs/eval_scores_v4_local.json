@@ -1,0 +1,31 @@
+{
+    "evaluator": "Qwen/Qwen3-32B",
+    "backend": "transformers",
+    "dtype": "bfloat16",
+    "prompt_source": "Table 7 verbatim",
+    "predictions_file": "/home/cai_tkmce/Desktop/disastervlm_ds/dualstream_impl/Rescue_VLM_Version3/outputs/multimodal_v3/test_predictions_v4.json",
+    "total_samples": 1554,
+    "total_evaluated": 0,
+    "coverage_pct": 0.0,
+    "failures": {
+        "empty_gt_or_pred": 0,
+        "model_error": 1554,
+        "parse_fail": 0
+    },
+    "caption": {
+        "n": 0,
+        "DAP": null,
+        "DDR": null,
+        "FC": null,
+        "AVG": null
+    },
+    "advice": {
+        "n": 0,
+        "RN": null,
+        "APP": null,
+        "SC": null,
+        "IF": null,
+        "AVG": null
+    },
+    "per_sample": []
+}
