@@ -49,6 +49,7 @@ Rescue_VLM_Ultimate_Version3.5/
 ├── bata_explosion_post_0.png
 ├── turkey_earthquake4_pre_733.png
 └── turkey_earthquake4_sar_post_733.png
+├── requirements.txt
 ```
 
 The locally downloaded Qwen model weights and Hugging Face cache are not required to be committed to the public repository. Obtain pretrained model files from their official source and follow the relevant model licence.
