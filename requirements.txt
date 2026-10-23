@@ -1,0 +1,17 @@
+# Rescue-VLM dependency versions
+#
+# IMPORTANT:
+# The exact versions below are conservative candidate pins, NOT verified
+# against the user's final DGX Spark environment. Validate before publishing.
+# Install PyTorch separately for the target CUDA/DGX Spark environment:
+# https://pytorch.org/get-started/locally/
+
+transformers==4.49.0
+accelerate==1.4.0
+peft==0.14.0
+open_clip_torch==2.30.0
+Pillow==11.1.0
+numpy==1.26.4
+tqdm==4.67.1
+safetensors==0.5.3
+huggingface_hub==0.29.3
